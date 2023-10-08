@@ -3,12 +3,11 @@ version: '3.8'
 services:
   mongo:
     image: mongo:latest
-    restart: always
     container_name: sensor-logs
     hostname: sensor-logs
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: changethispassword2023
+      MONGO_INITDB_ROOT_PASSWORD: estacionamiento2023
     ports:
       - 27017:27017
     volumes:
