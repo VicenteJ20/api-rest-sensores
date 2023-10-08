@@ -49,7 +49,18 @@ const updateSensorService = async (data) => {
     const { _id } = data
     
     // verifica si existe el sensor con ese id
+    const sensor = await Sensor.findById(_id)
+    if (!sensor) return { status: 404, message: 'Sensor  not found' }
 
+    // actualiza el sensor
+    
+    await Sensor.updateOne({ _id }, data)
+    console.log('Sensor updated successfully')
+    
+    return {
+      status: 200,
+      message: 'Sensor updated successfully'
+    }
   } catch (err) {
     console.log('Error message: ' + err.message)
     throw new Error(err)

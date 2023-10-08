@@ -45,9 +45,8 @@ const createData = async (req, res) => {
 // Esta función es la que se encarga de actualizar un sensor en la base de datos.
 const updateData = async (req, res) => {
   try {
-    const id = req.params.id
-    const res = await getAllDataById(id)
-    res.status(200).send(res)
+    const response = await updateSensorService(req.body)
+    res.status(response.status).send(response.message)
   } catch (err) {
     console.log('Error message: ' + err.message)
     res.status(500).send('Error message: ' + err.message)
