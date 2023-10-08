@@ -1,0 +1,24 @@
+{
+  "name": "api-rest-sensores",
+  "version": "0.0.1",
+  "description": "Este proyecto está dedicado al desarrollo de una API Rest que permita realizar un CRUD orientado a la administración de los sensores incluídos en el proyecto 'Estacionamiento inteligente', para la almacenar la información se utiliza mongodb y como ODM se utiliza mongoose",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js"
+  },
+  "keywords": [
+    "NODEJS",
+    "api",
+    "crud"
+  ],
+  "author": "Vicente Jorquera",
+  "license": "MIT",
+  "devDependencies": {
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.6.0"
+  }
+}
