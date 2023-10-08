@@ -1,9 +1,16 @@
+const { getAllDataService, createSensorService } = require('../../services/sensorService')
 
 // Esta función es la que se encarga de traer toda la información realacionada con los sensores desde la base de datos.
 // Se recomienda diseñar un paginador para aligerar la carga de datos durante la transacción.
 
 const getAllData = async (req, res) => {
-  res.send('Hola mundo desde express')
+  try {
+    const sensors = await getAllDataService()
+    res.send(sensors)
+  } catch (err) {
+    console.log('Error message: ' + err.message)
+    res.status(500).send('Error message: ' + err.message)
+  }
 }
 
 // Esta función es la que se encarga de traer toda la información realacionada con un sensor en específico desde la base de datos.
