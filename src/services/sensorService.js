@@ -67,9 +67,27 @@ const updateSensorService = async (data) => {
   }
 }
 
+const deleteSensorService = async (id) => {
+  try {
+    const sensor = await Sensor.findById(id)
+    if (!sensor) return { status: 404, message: 'Sensor not found' }
+
+    await Sensor.deleteOne({ _id: id })
+    console.log(`Sensor "${id}" deleted successfully`)
+    return {
+      status: 200,
+      message: 'Sensor deleted successfully'
+    }
+  } catch (err) {
+    console.log('Error message: ' + err.message)
+    throw new Error(err)
+  }
+}
+
 module.exports = {
   getAllDataService,
   getAllDataById,
   createSensorService,
-  updateSensorService
+  updateSensorService,
+  deleteSensorService
 }

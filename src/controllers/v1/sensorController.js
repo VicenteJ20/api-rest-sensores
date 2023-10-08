@@ -1,4 +1,4 @@
-const { getAllDataService, createSensorService, updateSensorService, getAllDataById } = require('../../services/sensorService')
+const { getAllDataService, createSensorService, updateSensorService, getAllDataById, deleteSensorService } = require('../../services/sensorService')
 
 // Esta función es la que se encarga de traer toda la información realacionada con los sensores desde la base de datos.
 // Se recomienda diseñar un paginador para aligerar la carga de datos durante la transacción.
@@ -55,7 +55,14 @@ const updateData = async (req, res) => {
 
 // Esta función es la que se encarga de eliminar un sensor en la base de datos.
 const deleteData = async (req, res) => {
-  res.send('Hola mundo desde express se elimina un sensor. con ID: ' + req.params.id)
+  try {
+    const id = req.params.id
+    const response = await deleteSensorService(id)
+    res.status(response.status).send(response.message)
+  } catch (err) {
+    console.log('Error message: ' + err.message)
+    res.status(500).send('Error message: ' + err.message)
+  }
 }
 
 module.exports = {
