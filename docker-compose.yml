@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  mongo:
+  mongo1:
     image: mongo:latest
     container_name: sensor-logs
     hostname: sensor-logs
@@ -13,3 +13,21 @@ services:
     volumes:
       - ./data:/data/db
       - ./data/log:/var/log/mongodb
+  mongo2:
+    image: mongo:latest
+    container_name: sensor-logs-replica
+    hostname: sensor-logs-replica
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: estacionamiento2023
+    ports:
+      - 27018:27017
+  mongo3:
+    image: mongo:latest
+    container_name: sensor-logs-replica-arbitraria
+    hostname: sensor-logs-replica-arbitraria
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: estacionamiento2023
+    ports:
+      - 27019:27017
