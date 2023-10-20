@@ -1,33 +1,36 @@
 version: '3.8'
 
+networks:
+  mongoCluster:
+    driver: bridge
+
 services:
   mongo1:
     image: mongo:latest
-    container_name: sensor-logs
-    hostname: sensor-logs
+    container_name: mongo1
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: estacionamiento2023
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=estacionamiento2023
+      - MONGODB_KEYFILE=./src/credentials/security.key
     ports:
       - 27017:27017
     volumes:
       - ./data:/data/db
-      - ./data/log:/var/log/mongodb
+    networks:
+      - mongoCluster
+    command:
+      - mongod --replSet myReplicaSet --bind_ip localhost,mongo1
+
   mongo2:
     image: mongo:latest
-    container_name: sensor-logs-replica
-    hostname: sensor-logs-replica
+    container_name: mongo2
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: estacionamiento2023
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=estacionamiento2023
+      - MONGODB_KEYFILE=./src/credentials/security.key
     ports:
       - 27018:27017
-  mongo3:
-    image: mongo:latest
-    container_name: sensor-logs-replica-arbitraria
-    hostname: sensor-logs-replica-arbitraria
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: estacionamiento2023
-    ports:
-      - 27019:27017
+    networks:
+      - mongoCluster
+    command:
+      - mongod --replSet myReplicaSet --bind_ip localhost,mongo2
