@@ -4,11 +4,8 @@ const mongoose = require('mongoose')
 
 const Schema = new mongoose.Schema(
   {
-    _id: { type: String, required: true },
-    value: { type: Number, required: true },
-    area: { type: String, required: true },
-    boardId: { type: String, required: true },
-    timestamp: { type: Date, required: true }
+    Id: { type: String, required: true },
+    Status: { type: String, required: true }
   }
 )
 
