@@ -7,7 +7,7 @@ async function main() {
 
   connect() // se realiza intento de conexión a la base de datos a través d ela utilidad connect disponible en: /database/connector.js
 
-  const PORT = process.env.WEB_SERVER_PORT // establece el puerto donde arrancará el webserver.
+  const PORT = 3000 // establece el puerto donde arrancará el webserver.
   const app = express() // inicializa el servidor con express.
   // app config
   app.use(express.json()) // (middleware que nos permite hacer un req.body y obtener la información que se envía como post, put o patch).
